@@ -1,4 +1,4 @@
-package com.example.tickertracker.web.dto;
+package com.example.ticktracker.web.dto;
 
 public record RegionInsight(
         String region,

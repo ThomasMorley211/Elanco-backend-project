@@ -1,8 +1,8 @@
-package com.example.tickertracker.web; // TODO: change to your package
+package com.example.ticktracker.web; // TODO: change to your package
 
-import com.example.tickertracker.service.ReportService;
-import com.example.tickertracker.web.dto.RegionCount;
-import com.example.tickertracker.web.dto.TrendPoint;
+import com.example.ticktracker.service.ReportService;
+import com.example.ticktracker.web.dto.RegionCount;
+import com.example.ticktracker.web.dto.TrendPoint;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,6 +1,6 @@
-package com.example.tickertracker.web.dto; // TODO: change to your package
+package com.example.ticktracker.web.dto; // TODO: change to your package
 
-import com.example.tickertracker.domain.Sighting;
+import com.example.ticktracker.domain.Sighting;
 
 import java.time.LocalDateTime;
 

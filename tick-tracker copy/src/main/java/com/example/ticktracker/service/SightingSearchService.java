@@ -1,8 +1,8 @@
-package com.example.tickertracker.service; // TODO: change to your package
+package com.example.ticktracker.service; // TODO: change to your package
 
-import com.example.tickertracker.domain.Sighting;
-import com.example.tickertracker.domain.SightingRepository;
-import com.example.tickertracker.domain.SightingSpecifications;
+import com.example.ticktracker.domain.Sighting;
+import com.example.ticktracker.domain.SightingRepository;
+import com.example.ticktracker.domain.SightingSpecifications;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

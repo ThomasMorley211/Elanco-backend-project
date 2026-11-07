@@ -1,8 +1,8 @@
-package com.example.tickertracker.web; // TODO: change to your package
+package com.example.ticktracker.web; // TODO: change to your package
 
-import com.example.tickertracker.service.SightingSearchService;
-import com.example.tickertracker.web.dto.PagedResponse;
-import com.example.tickertracker.web.dto.SightingResponse;
+import com.example.ticktracker.service.SightingSearchService;
+import com.example.ticktracker.web.dto.PagedResponse;
+import com.example.ticktracker.web.dto.SightingResponse;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.format.annotation.DateTimeFormat;

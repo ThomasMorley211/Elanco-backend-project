@@ -1,7 +1,7 @@
-package com.example.tickertracker.web;
+package com.example.ticktracker.web;
 
-import com.example.tickertracker.service.InsightService;
-import com.example.tickertracker.web.dto.RegionInsight;
+import com.example.ticktracker.service.InsightService;
+import com.example.ticktracker.web.dto.RegionInsight;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.format.annotation.DateTimeFormat;

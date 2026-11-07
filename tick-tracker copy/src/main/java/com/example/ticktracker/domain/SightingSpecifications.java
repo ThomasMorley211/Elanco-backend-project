@@ -1,4 +1,4 @@
-package com.example.tickertracker.domain; // TODO: change to your package
+package com.example.ticktracker.domain; // TODO: change to your package
 
 import org.springframework.data.jpa.domain.Specification;
 

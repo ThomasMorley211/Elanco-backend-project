@@ -1,8 +1,8 @@
-package com.example.tickertracker.service; // TODO: change to your package
+package com.example.ticktracker.service;
 
-import com.example.tickertracker.domain.SightingRepository;
-import com.example.tickertracker.web.dto.RegionCount;
-import com.example.tickertracker.web.dto.TrendPoint;
+import com.example.ticktracker.domain.SightingRepository;
+import com.example.ticktracker.web.dto.RegionCount;
+import com.example.ticktracker.web.dto.TrendPoint;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

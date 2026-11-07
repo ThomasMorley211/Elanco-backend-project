@@ -1,7 +1,7 @@
-package com.example.tickertracker.service;
+package com.example.ticktracker.service;
 
-import com.example.tickertracker.domain.SightingRepository;
-import com.example.tickertracker.web.dto.RegionInsight;
+import com.example.ticktracker.domain.SightingRepository;
+import com.example.ticktracker.web.dto.RegionInsight;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
