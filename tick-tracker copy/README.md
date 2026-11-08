@@ -1,4 +1,4 @@
-# Tick Tracker
+# Tick Tracker by Thomas Morley (@ThomasMorley211@outlook.com)
 
 Backend for the Elanco Placement Program technical task. It pulls UK tick sighting data from the Elanco API, validates and stores it, and exposes REST endpoints to search sightings, view reports and spot trends.
 
