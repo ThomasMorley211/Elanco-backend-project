@@ -3,7 +3,9 @@
 Backend for the Elanco Placement Program technical task. It pulls UK tick sighting data from the Elanco API, validates and stores it, and exposes REST endpoints to search sightings, view reports and spot trends.
 
 Author: Thomas Morley
-#Claude AI on sonnet 5.5 was used for fixing errors towards the end of the process and troubleshooting with swaggerUI and maven
+
+
+Claude AI on sonnet 5.5 was used for fixing errors towards the end of the process and troubleshooting with swaggerUI and maven
 ## Outline
 
 - Downloads about 1000 sightings from `https://dev-task.elancoapps.com/data/tick-sightings`.
