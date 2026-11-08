@@ -32,15 +32,17 @@ public class IngestionService {
     private final ObjectMapper objectMapper;
 
     private final AtomicBoolean running = new AtomicBoolean(false);
+
     public IngestionService(ElancoApiClient apiClient,
-        sightingValidator validator, TicksightingRepository sightingRepository,
-        RejectedRecordRepository rejectedRepository, ObjectMapper, objectMapper){
+        SightingValidator validator, TickSightingRepository sightingRepository,
+        RejectedRecordRepository rejectedRepository, ObjectMapper objectMapper){
             this.apiClient = apiClient;
             this.validator = validator;
-            this.sightingRespository= sightingRepository;
+            this.sightingRepository = sightingRepository;
             this.rejectedRepository = rejectedRepository;
             this.objectMapper = objectMapper;
         }
+
     public IngestionResult ingest(){
         if(!running.compareAndSet(false,true)){
             throw new IngestionInProgressException();
@@ -48,7 +50,7 @@ public class IngestionService {
         try {
             List<SightingDto> raw = apiClient.fetchAllSightings();
 
-            Map<String, TickSighting> valid = new LinkedHashMaps<>();
+            Map<String, TickSighting> valid = new LinkedHashMap<>();
             List<RejectedRecord> rejected = new ArrayList<>();
             int repeatedInDownload = 0;
 
@@ -64,12 +66,12 @@ public class IngestionService {
                 .map(TickSighting::getId)
                 .collect(Collectors.toSet());
             List<TickSighting> toInsert = valid.values().stream()
-                .filter(s -> !alreadySorted.contains(s.getId()))
+                .filter(s -> !alreadyStored.contains(s.getId()))
                 .toList();
             sightingRepository.saveAll(toInsert);
             rejectedRepository.deleteAllInBatch();
             rejectedRepository.saveAll(rejected);
-            IngestionResult summary = new Ingestionresult(
+            IngestionResult summary = new IngestionResult(
                 raw.size(), toInsert.size(), alreadyStored.size() + repeatedInDownload, rejected.size());
             log.info("Ingestion finished: {}",summary);
             return summary;

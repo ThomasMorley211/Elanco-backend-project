@@ -1,9 +1,10 @@
 package com.example.ticktracker.ingest;
-import com.example.ticktracker.domain.TickSighting;
-public record ValidationReuslt(TickSighting sighting, String rejectionReason){
-    public static ValidationResult accepted(TickSighting sighting){
-        return new ValidationResult(sighting,null);
 
+import com.example.ticktracker.domain.TickSighting;
+
+public record ValidationResult(TickSighting sighting, String rejectionReason){
+    public static ValidationResult accepted(TickSighting sighting){
+        return new ValidationResult(sighting, null);
     }
     public static ValidationResult rejected(String reason){
         return new ValidationResult(null, reason);
@@ -12,4 +13,3 @@ public record ValidationReuslt(TickSighting sighting, String rejectionReason){
         return sighting != null;
     }
 }
-

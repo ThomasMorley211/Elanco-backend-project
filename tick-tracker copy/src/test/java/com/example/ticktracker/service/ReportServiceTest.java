@@ -1,4 +1,4 @@
-package main.java.com.example.ticktracker.service;
+package com.example.ticktracker.service;
 
 import com.example.ticktracker.domain.SightingRepository;
 import com.example.ticktracker.web.dto.RegionCount;

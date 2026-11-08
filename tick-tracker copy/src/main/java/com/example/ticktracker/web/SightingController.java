@@ -1,4 +1,4 @@
-package com.example.ticktracker.web; // TODO: change to your package
+package com.example.ticktracker.web;
 
 import com.example.ticktracker.service.SightingSearchService;
 import com.example.ticktracker.web.dto.PagedResponse;
@@ -14,10 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 
-/**
- * GET /api/sightings?from=2025-01-01&to=2025-06-30&region=Berkshire&location=reading&page=0&size=20
- * All filters are optional and can be combined.
- */
 @RestController
 @RequestMapping("/api/sightings")
 @Validated
@@ -37,14 +33,14 @@ public class SightingController {
             @RequestParam(required = false)
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
 
-            @RequestParam(required = false) String region,
             @RequestParam(required = false) String location,
+            @RequestParam(required = false) String species,
 
             @RequestParam(defaultValue = "0") @Min(0) int page,
             @RequestParam(defaultValue = "20") @Min(1) @Max(100) int size) {
 
         return PagedResponse.from(
-                searchService.search(from, to, region, location, page, size)
+                searchService.search(from, to, location, species, page, size)
                         .map(SightingResponse::from));
     }
 }

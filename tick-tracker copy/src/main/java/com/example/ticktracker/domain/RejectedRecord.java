@@ -8,10 +8,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.Instant;
 
-@Entity 
+@Entity
 @Table(name = "rejected_record")
 public class RejectedRecord{
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -20,13 +20,13 @@ public class RejectedRecord{
     @Column(nullable = false, length = 500)
     private String reason;
     @Column(name = "rejected_at", nullable = false)
-    private String rejectedAt;
+    private Instant rejectedAt;
     protected RejectedRecord(){
 
     }
 
 
-    public RejectedRecord(String rawpayload, String reason) {
+    public RejectedRecord(String rawPayload, String reason) {
         this.rawPayload = rawPayload;
         this.reason = reason;
         this.rejectedAt=Instant.now();

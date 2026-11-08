@@ -1,8 +1,8 @@
-package com.example.ticktracker.service; // TODO: change to your package
+package com.example.ticktracker.service;
 
-import com.example.ticktracker.domain.Sighting;
 import com.example.ticktracker.domain.SightingRepository;
 import com.example.ticktracker.domain.SightingSpecifications;
+import com.example.ticktracker.domain.TickSighting;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -22,22 +22,21 @@ public class SightingSearchService {
     }
 
     @Transactional(readOnly = true)
-    public Page<Sighting> search(LocalDate from, LocalDate to, String region,
-                                 String location, int page, int size) {
+    public Page<TickSighting> search(LocalDate from, LocalDate to, String location,
+                                     String species, int page, int size) {
 
-        // Caught by GlobalExceptionHandler -> 400 ProblemDetail
         if (from != null && to != null && from.isAfter(to)) {
             throw new IllegalArgumentException("'from' must not be after 'to'.");
         }
 
-        Specification<Sighting> spec = Specification
-                .where(SightingSpecifications.sightedOnOrAfter(from))
-                .and(SightingSpecifications.sightedOnOrBefore(to))
-                .and(SightingSpecifications.regionEquals(region))
-                .and(SightingSpecifications.locationContains(location));
+        Specification<TickSighting> spec = Specification.allOf(
+                SightingSpecifications.sightedOnOrAfter(from),
+                SightingSpecifications.sightedOnOrBefore(to),
+                SightingSpecifications.locationContains(location),
+                SightingSpecifications.speciesContains(species));
 
         PageRequest pageable = PageRequest.of(page, size,
-                Sort.by(Sort.Direction.DESC, "sightedAt").and(Sort.by("id")));
+                Sort.by(Sort.Direction.DESC, "date").and(Sort.by("id")));
 
         return repository.findAll(spec, pageable);
     }

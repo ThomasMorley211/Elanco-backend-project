@@ -1,17 +1,18 @@
-package com.example.ticktracker.web.dto; // TODO: change to your package
+package com.example.ticktracker.web.dto;
 
-import com.example.ticktracker.domain.Sighting;
+import com.example.ticktracker.domain.TickSighting;
 
 import java.time.LocalDateTime;
 
-/** What the API returns for a sighting (keeps the JPA entity out of the response). */
 public record SightingResponse(
-        Long id,
-        String region,
+        String id,
+        LocalDateTime date,
         String location,
-        LocalDateTime sightedAt
+        String species,
+        String latinName
 ) {
-    public static SightingResponse from(Sighting s) {
-        return new SightingResponse(s.getId(), s.getRegion(), s.getLocation(), s.getSightedAt());
+    public static SightingResponse from(TickSighting s) {
+        return new SightingResponse(s.getId(), s.getDate(), s.getLocation(),
+                s.getSpecies(), s.getLatinName());
     }
 }

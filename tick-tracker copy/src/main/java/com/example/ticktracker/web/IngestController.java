@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController 
+@RestController
 @RequestMapping("/api/admin")
 public class IngestController {
     private final IngestionService ingestionService;
@@ -22,8 +22,8 @@ public class IngestController {
     }
     @PostMapping("/ingest")
     public IngestionResult ingest(){
-        return ingestionService ingest();
-        }
+        return ingestionService.ingest();
+    }
     @GetMapping("/rejected")
     public List<RejectedRecord> rejected(){
         return rejectedRepository.findAll();

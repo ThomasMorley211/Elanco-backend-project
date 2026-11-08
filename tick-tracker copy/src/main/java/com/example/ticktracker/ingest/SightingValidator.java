@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeParseException;
 
-@Component 
+@Component
 public class SightingValidator{
     private static final int MAX_ID = 64;
     private static final int MAX_LOCATION = 100;
@@ -41,14 +41,12 @@ public class SightingValidator{
         }
         String location = clean(dto.location());
         if (location == null){
-            if (location == null){
-                return ValidationResult.rejected("Missing location");
-            }
+            return ValidationResult.rejected("Missing location");
+        }
         if (location.length() > MAX_LOCATION){
             return ValidationResult.rejected("Location is too long");
         }
         location = titleCase(location);
-        }
         String species = clean(dto.species());
         if (species == null){
             return ValidationResult.rejected("missing species");

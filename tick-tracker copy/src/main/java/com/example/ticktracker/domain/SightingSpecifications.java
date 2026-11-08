@@ -1,46 +1,41 @@
-package com.example.ticktracker.domain; // TODO: change to your package
+package com.example.ticktracker.domain;
 
 import org.springframework.data.jpa.domain.Specification;
 
 import java.time.LocalDate;
 
-/**
- * Each method returns null-safe "no-op" specifications when the filter is absent,
- * so they can be chained freely. Assumes Sighting has: sightedAt (LocalDateTime),
- * region (String) and location (String).
- */
 public final class SightingSpecifications {
 
     private SightingSpecifications() {
     }
 
-    public static Specification<Sighting> sightedOnOrAfter(LocalDate from) {
+    public static Specification<TickSighting> sightedOnOrAfter(LocalDate from) {
         return (root, query, cb) -> from == null ? null
-                : cb.greaterThanOrEqualTo(root.get("sightedAt"), from.atStartOfDay());
+                : cb.greaterThanOrEqualTo(root.get("date"), from.atStartOfDay());
     }
 
-    /** Inclusive of the whole 'to' day. */
-    public static Specification<Sighting> sightedOnOrBefore(LocalDate to) {
+    public static Specification<TickSighting> sightedOnOrBefore(LocalDate to) {
         return (root, query, cb) -> to == null ? null
-                : cb.lessThan(root.get("sightedAt"), to.plusDays(1).atStartOfDay());
+                : cb.lessThan(root.get("date"), to.plusDays(1).atStartOfDay());
     }
 
-    public static Specification<Sighting> regionEquals(String region) {
-        return (root, query, cb) -> isBlank(region) ? null
-                : cb.equal(cb.lower(root.get("region")), region.trim().toLowerCase());
-    }
-
-    public static Specification<Sighting> locationContains(String location) {
+    public static Specification<TickSighting> locationContains(String location) {
         return (root, query, cb) -> isBlank(location) ? null
                 : cb.like(cb.lower(root.get("location")),
                         "%" + escapeLike(location.trim().toLowerCase()) + "%", '\\');
     }
 
-    private static boolean isBlank(String s) {
-        return s == null || s.isBlank();
+    public static Specification<TickSighting> speciesContains(String species) {
+        return (root, query, cb) -> isBlank(species) ? null
+                : cb.like(cb.lower(root.get("species")),
+                        "%" + escapeLike(species.trim().toLowerCase()) + "%", '\\');
     }
 
-    private static String escapeLike(String s) {
-        return s.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_");
+    private static boolean isBlank(String value) {
+        return value == null || value.isBlank();
+    }
+
+    private static String escapeLike(String value) {
+        return value.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_");
     }
 }

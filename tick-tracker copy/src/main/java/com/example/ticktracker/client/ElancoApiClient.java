@@ -24,7 +24,7 @@ public class ElancoApiClient{
     public ElancoApiClient(RestClient.Builder builder,
         @Value("${elanco.api.base-url}") String baseUrl,
         @Value("${elanco.api.max-retries}") int maxRetries,
-        @Value("${elanco.api.rate-limit-wait-seconds}") long rateLimitwaitSeconds){
+        @Value("${elanco.api.rate-limit-wait-seconds}") long rateLimitWaitSeconds){
             this.restClient = builder.baseUrl(baseUrl).build();
             this.maxRetries=maxRetries;
             this.rateLimitWaitSeconds = rateLimitWaitSeconds;
@@ -34,7 +34,7 @@ public class ElancoApiClient{
             for (int attempt = 1; attempt <= maxRetries; attempt++){
                 long waitMillis = 0;
                 try{
-                    List<SightingDto>body =restClient.get()
+                    List<SightingDto> body = restClient.get()
                     .uri("/tick-sightings")
                     .retrieve()
                     .body(new ParameterizedTypeReference<List<SightingDto>>() { });
@@ -46,7 +46,7 @@ public class ElancoApiClient{
                 }catch (HttpClientErrorException.TooManyRequests e){
                     lastProblem = "rate limited (HTTP 429)";
                     waitMillis = rateLimitWaitSeconds * 1000;
-                }catch(HttpServerErrorExpection e){
+                }catch(HttpServerErrorException e){
                     lastProblem = "server error (HTTP " + e.getStatusCode().value() + ")";
                     waitMillis=2000L * attempt;
                 }catch (ResourceAccessException e){
